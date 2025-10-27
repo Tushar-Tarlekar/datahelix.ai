@@ -1,0 +1,637 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+{% load asset_tags %}
+
+
+
+{% include 'components/navbar/version_2.html' %}
+
+
+
+
+
+{% load static %}
+{% load asset_tags %}
+
+
+
+
+
+
+{% load static %}
+{% load asset_tags %}
+{% load beautify %}
+
+
+
+  {% block main_content %}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<main>
+
+
+
+  <form method="POST" action="{% url 'place_order' company_name %}">
+    {% csrf_token %}
+    {% if errors %}
+    {% for key, value in errors.items %}
+    <div class="error-message">{{key|beautify}}: {{value.pop.message|capfirst}}</div>
+    {% endfor %}
+    {% endif %}
+    {% for error in list_errors %}
+    <div class="error-message">{{error}}</div>
+    {% endfor %}
+    <div class="container  mx-auto p-8">
+
+      <div class="max-w-sm lg:max-w-lg mx-auto">
+        <div class="mb-4 text-lg font-bold">Personal Details</div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="input-box">
+            <label for="company-name" class="block text-sm font-medium text-gray-700">
+              Company / University Name<span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="company-name" name="company_name"
+              class="mt-1 block w-full border rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              value="{{company_name}}" required maxlength="100">
+          </div>
+          
+
+          <div class="input-box">
+            <label for="requestor-name" class="block text-sm font-medium text-gray-700">
+              Name<span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="requestor-name" name="name"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              value="{{name}}" required maxlength="100">
+          </div>
+
+          <div class="input-box">
+            <label for="address" class="block text-sm font-medium text-gray-700">
+              Address<span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="address" name="address"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              required maxlength="500">
+          </div>
+
+          <div class="input-box">
+            <label for="contact-number" class="block text-sm font-medium text-gray-700">
+              Contact Number<span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="contact-number" name="contact"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              value="{{contact_number}}" required pattern="\d*" title="Only numbers allowed" minlength="7"
+              maxlength="15">
+          </div>
+
+          <div class="input-box">
+            <label for="email-id" class="block text-sm font-medium text-gray-700">
+              Email ID<span class="text-red-500">*</span>
+            </label>
+            <input type="email" id="email-id" name="email"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              value="{{email}}" required maxlength="254">
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-sm lg:max-w-lg mx-auto mt-10">
+        <div class="mb-4 text-lg font-bold">Project Details</div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div class="col-span-2 input-box">
+            <label for="project-name" class="block text-sm font-medium text-gray-700">
+              Project Name<span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="project-name" name="project_name"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              required maxlength="500">
+          </div>
+
+          <div class="input-box">
+            <label class="block text-sm font-medium text-gray-700">
+              Planned use(s) of the project<span class="text-red-500">*</span>
+            </label>
+            <div class="mt-2 space-y-2">
+              <label for="basic" class="flex items-center">
+                <input type="radio" name="project_use" id="basic" class="form-radio text-blue-600 focus:ring-yellow-500"
+                  required value="Basic Research">
+                <span class="ml-2">Basic Research</span>
+              </label>
+              <label for="clinical" class="flex items-center">
+                <input type="radio" name="project_use" id="clinical"
+                  class="form-radio text-blue-600 focus:ring-yellow-500" required value="Clinical Research">
+                <span class="ml-2">Clinical Research</span>
+              </label>
+              <label for="diagnostic" class="flex items-center">
+                <input type="radio" name="project_use" id="diagnostic"
+                  class="form-radio text-blue-600 focus:ring-yellow-500" required value="Diagnostic">
+                <span class="ml-2">Diagnostic</span>
+              </label>
+            </div>
+          </div>
+          <div class="block md:hidden lg:hidden"> <br></div>
+          <div class="input-box">
+            <label class="block text-sm font-medium text-gray-700">
+              Nature of study<span class="text-red-500">*</span>
+            </label>
+            <div class="mt-2 space-y-2">
+              <label for="longitudinal" class="flex items-center">
+                <input type="radio" name="study_nature" id="longitudinal"
+                  class="form-radio text-blue-600 focus:ring-yellow-500" required value="Longitudinal">
+                <span class="ml-2">Longitudinal</span>
+              </label>
+              <label for="one-time" class="flex items-center">
+                <input type="radio" name="study_nature" id="one-time"
+                  class="form-radio text-blue-600 focus:ring-yellow-500" required value="One time">
+                <span class="ml-2">One time</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="col-span-2  input-box">
+            <label for="start-date" class="block text-sm font-medium text-gray-700">
+              Tentative start date<span class="text-red-500">*</span>
+            </label>
+            <input type="date" id="start-date" name="start_date"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              required min="2024-10-03">
+          </div>
+         
+        </div>
+
+        <div class="flex-col md:flex-row lg:flex-row mt-7">
+          <div class="input-box">
+            <label for="project-objective" class="block text-sm font-medium text-gray-700">
+              Project objective<span class="text-red-500">*</span>
+            </label>
+            <textarea id="project-objective" name="project_objective"
+              class="mt-1 w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              rows="3" required></textarea>
+          </div>
+          
+  
+          <div class="input-box">
+            <label for="project-outcome" class="block text-sm font-medium text-gray-700">
+              Project outcome expectations<span class="text-red-500">*</span>
+            </label>
+            <textarea id="project-outcome" name="project_outcome"
+              class="mt-1 block  w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              rows="3" required></textarea>
+          </div>
+        </div>
+      </div>
+      
+
+
+      <div class="max-w-sm lg:max-w-lg mx-auto mt-10">
+        <div class="w-full">
+          <div class="text-xl font-semibold mb-4">NGS Service needed</div>
+
+          <div class="w-full md:w-1/2 mb-4">
+            <label for="serviceChoice" class="block text-sm font-medium text-gray-700">
+              Please mention choice of service<span class="text-red-500">*</span>
+            </label>
+            <select name="service_choice" id="serviceChoice" required
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none ">
+              <option value="">---</option>
+              <option value="DNA Sequencing">DNA Sequencing</option>
+              <option value="RNA Sequencing">RNA Sequencing</option>
+              <option value="Epigenetics">Epigenetics</option>
+              <option value="Microarray">Microarray</option>
+              <option value="10X">10X</option>
+              <option value="Pacbio">Pacbio</option>
+              <option value="Metagenomics">Metagenomics</option>
+              <option value="Metatranscriptomics">Metatranscriptomics</option>
+            </select>
+          </div>
+          <div class="w-full md:w-1/2 mb-4">
+            <label for="specificService" class="block text-sm font-medium text-gray-700">
+              Please select specific service<span class="text-red-500">*</span>
+            </label>
+            <select name="specific_service" id="specificService" required
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none">
+              <option value="">Please select an option first</option>
+            </select>
+          </div>
+
+          <div class="w-full mb-4">
+            <label for="customized-service" class="block text-sm font-medium text-gray-700">Customized service (please
+              elaborate nature of service needed)</label>
+            <textarea
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none sm:text-sm"
+              name="customized_service" id="customized-service" rows="3"></textarea>
+          </div>
+
+          <div class="w-full md:w-1/2 mb-4">
+            <label class="block text-sm font-medium text-gray-700">Platform<span class="text-red-500">*</span></label>
+            <div class="mt-1 space-y-2">
+              <div>
+                <input type="radio" name="ngs_platform" id="illumina" required value="Illumina (Novaseq6000)">
+                <label for="illumina">Illumina (Novaseq6000)</label>
+              </div>
+              <div>
+                <input type="radio" name="ngs_platform" id="illumina-miseq" required value="Illumina (MiSeq)">
+                <label for="illumina-miseq">Illumina (MiSeq)</label>
+              </div>
+              <div>
+                <input type="radio" name="ngs_platform" id="nanopore" required value="Nanopore">
+                <label for="nanopore">Nanopore</label>
+              </div>
+              <div>
+                <input type="radio" name="ngs_platform" id="ngs-others" required value="Others">
+                <label for="ngs-others">Others</label>
+                <input type="text"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+                  name="ngs_specify" placeholder="Please specify" style="display: none;" maxlength="100">
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/2 mb-4">
+            <label class="block text-sm font-medium text-gray-700">Sample type<span
+                class="text-red-500">*</span></label>
+            <div class="mt-1 space-y-2">
+              <div>
+                <input type="radio" name="sample_type" id="sample-type-dna" required value="Genomic DNA">
+                <label for="sample-type-dna">Genomic DNA</label>
+              </div>
+              <div>
+                <input type="radio" name="sample_type" id="sample-type-meta-dna" required value="Metagenomic DNA">
+                <label for="sample-type-meta-dna">Metagenomic DNA</label>
+              </div>
+              <div>
+                <input type="radio" name="sample_type" id="sample-type-others" required value="Others">
+                <label for="sample-type-others">Others</label>
+                <input type="text"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+                  name="sample_type_specify" placeholder="Please specify" style="display: none;" maxlength="100">
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full  mb-4">
+            <label for="model-type" class="block text-sm font-medium text-gray-700">Model type<span
+                class="text-red-500">*</span></label>
+            <input type="text"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              name="model_type" id="model-type" required maxlength="100">
+          </div>
+
+          <div class="w-full  mb-4">
+            <label for="prepared-library" class="block text-sm font-medium text-gray-700">Prepared library (please
+              mention kit used)<span class="text-red-500">*</span></label>
+            <input type="text"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              name="prepared_library" id="prepared-library" required maxlength="500">
+          </div>
+
+          <div class="w-full mb-4">
+            <label for="sample-number" class="block text-sm font-medium text-gray-700">Number of samples<span
+                class="text-red-500">*</span></label>
+            <input type="number"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+              name="sample_number" id="sample-number" required>
+          </div>
+
+          <div class="space-y-6">
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700">
+                Sequencing Parameters (read length)
+                <span class="text-red-500">*</span>
+              </label>
+              <div class="mt-2 space-y-2">
+                <label for="sequencing-single" class="flex items-center">
+                  <input type="radio" name="sequencing_parameter" id="sequencing-single" required value="Single end: 50"
+                    class="mr-2">
+                  Single end: 50
+                </label>
+                <label for="sequencing-double-75" class="flex items-center">
+                  <input type="radio" name="sequencing_parameter" id="sequencing-double-75" required
+                    value="Paired end: 75" class="mr-2">
+                  Paired end: 75
+                </label>
+                <label for="sequencing-double-150" class="flex items-center">
+                  <input type="radio" name="sequencing_parameter" id="sequencing-double-150" required
+                    value="Paired end: 150" class="mr-2">
+                  Paired end: 150
+                </label>
+                <label for="sequencing-double-250" class="flex items-center">
+                  <input type="radio" name="sequencing_parameter" id="sequencing-double-250" required
+                    value="Paired end: 250" class="mr-2">
+                  Paired end: 250
+                </label>
+                <label for="sequencing-double-300" class="flex items-center">
+                  <input type="radio" name="sequencing_parameter" id="sequencing-double-300" required
+                    value="Paired end: 300" class="mr-2">
+                  Paired end: 300
+                </label>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label for="sequencing-other" class="block text-sm font-medium text-gray-700">
+                Any other sequencing parameter
+              </label>
+              <input type="text"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+                name="sequencing_other" id="sequencing-other" maxlength="100">
+            </div>
+
+            <div class="mb-6">
+              <label for="sequencing-depth" class="block text-sm font-medium text-gray-700">
+                Required Sequencing Depth per sample
+                <span class="text-red-500">*</span>
+              </label>
+              <select name="sequencing_depth" id="sequencing-depth" required
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none">
+                <option value="">---</option>
+                <option value="30X">30X</option>
+                <option value="50X">50X</option>
+                <option value="100X">100X</option>
+              </select>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700">
+                Expected Data size in Gb per sample
+                <span class="text-red-500">*</span>
+              </label>
+              <div class="mt-2 space-y-2">
+                <label for="expected-data-upto-2" class="flex items-center">
+                  <input type="radio" name="expected_data" id="expected-data-upto-2" required value="Upto 2 Gb"
+                    class="mr-2">
+                  Upto 2 Gb
+                </label>
+                <label for="expected-data-2-10" class="flex items-center">
+                  <input type="radio" name="expected_data" id="expected-data-2-10" required value="2-10 Gb"
+                    class="mr-2">
+                  2-10 Gb
+                </label>
+                <label for="expected-data-10-20" class="flex items-center">
+                  <input type="radio" name="expected_data" id="expected-data-10-20" required value="10-20 Gb"
+                    class="mr-2">
+                  10-20 Gb
+                </label>
+                <label for="expected-data-20-100" class="flex items-center">
+                  <input type="radio" name="expected_data" id="expected-data-20-100" required value="20-100 Gb"
+                    class="mr-2">
+                  20-100 Gb
+                </label>
+                <label for="expected-data-other" class="flex items-center">
+                  <input type="radio" name="expected_data" id="expected-data-other" required value="Others"
+                    class="mr-2">
+                  Others
+                </label>
+                <input type="text" name="expected_data_specify" placeholder="Please specify"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none hidden"
+                  maxlength="100">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="max-w-sm lg:max-w-lg mx-auto mt-10">
+        <div class="space-y-6">
+          <div class="col-span-12">
+            <div class="text-lg font-semibold text-gray-700">Bioinformatics Analytics Support</div>
+          </div>
+
+          <div class="col-span-12">
+            <div class="mb-6">
+              <label for="reference-genome" class="block text-sm font-medium text-gray-700">
+                Reference genome name (if available) and Reference genome size in bp (if any)
+              </label>
+              <input type="text"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none"
+                name="reference_genome" id="reference-genome" maxlength="500">
+            </div>
+          </div>
+
+          <div class="col-span-12">
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700">Data analysis activities<span
+                  class="text-red-500">*</span></label>
+              <div class="mt-2 space-y-2">
+                <label for="data-analysis-qc" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-qc" required value="QC of raw reads"
+                    class="mr-2">
+                  QC of raw reads
+                </label>
+                <label for="data-analysis-genome" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-genome" required
+                    value="Genome assembly: Reference based" class="mr-2">
+                  Genome assembly: Reference based
+                </label>
+                <label for="data-analysis-genome-de-novo" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-genome-de-novo" required
+                    value="Genome assembly: De novo" class="mr-2">
+                  Genome assembly: De novo
+                </label>
+                <label for="data-analysis-transcript" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-transcript" required
+                    value="Quantifying transcript abundance" class="mr-2">
+                  Quantifying transcript abundance
+                </label>
+                <label for="data-analysis-dge" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-dge" required value="DGE analysis"
+                    class="mr-2">
+                  DGE analysis
+                </label>
+                <label for="data-analysis-comparative" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-comparative" required
+                    value="Comparative genomics: SNP/in-del" class="mr-2">
+                  Comparative genomics: SNP/in-del
+                </label>
+                <label for="data-analysis-analysis" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-analysis" required
+                    value="Report of analysis" class="mr-2">
+                  Report of analysis
+                </label>
+                <label for="data-analysis-other" class="flex items-center">
+                  <input type="radio" name="data_analysis" id="data-analysis-other" required value="Others"
+                    class="mr-2">
+                  Others
+                </label>
+                <input type="text"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none hidden"
+                  name="data_analysis_specify" placeholder="Please specify" maxlength="100">
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-6">
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700">Data Delivery method<span
+                  class="text-red-500">*</span></label>
+              <div class="mt-2 space-y-2">
+                <label for="data-delivery-hdd" class="flex items-center">
+                  <input type="radio" name="data_delivery" id="data-delivery-hdd" required value="HDD" class="mr-2">
+                  HDD
+                </label>
+                <label for="data-delivery-server" class="flex items-center">
+                  <input type="radio" name="data_delivery" id="data-delivery-server" required value="Server"
+                    class="mr-2">
+                  Server
+                </label>
+                <label for="data-delivery-cloud" class="flex items-center">
+                  <input type="radio" name="data_delivery" id="data-delivery-cloud" required value="Cloud Storage"
+                    class="mr-2">
+                  Cloud Storage
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-6">
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700">Data stored with miBiome<span
+                  class="text-red-500">*</span></label>
+              <div class="mt-2 space-y-2">
+                <label for="data-stored-yes" class="flex items-center">
+                  <input type="radio" name="data_stored" id="data-stored-yes" required value="Yes" class="mr-2">
+                  Yes
+                </label>
+                <label for="data-stored-no" class="flex items-center">
+                  <input type="radio" name="data_stored" id="data-stored-no" required value="No" class="mr-2">
+                  No
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-12">
+            <div class="mb-6">
+              <label for="comments" class="block text-sm font-medium text-gray-700">Comments</label>
+              <textarea
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none sm:text-sm"
+                name="comments" id="comments" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="col-span-12">
+            <div class="mb-6">
+              <label class="block text-sm font-medium text-gray-700">For first time customers: How did you hear about
+                us?</label>
+              <div class="mt-2 space-y-2">
+                <label for="hear-us-internet" class="flex items-center">
+                  <input type="radio" name="hear_us" id="hear-us-internet" value="Internet" class="mr-2">
+                  Internet
+                </label>
+                <label for="hear-us-website" class="flex items-center">
+                  <input type="radio" name="hear_us" id="hear-us-website" value="Website" class="mr-2">
+                  Website
+                </label>
+                <label for="hear-us-contact" class="flex items-center">
+                  <input type="radio" name="hear_us" id="hear-us-contact" value="Contact" class="mr-2">
+                  Contact
+                </label>
+                <label for="hear-us-other" class="flex items-center">
+                  <input type="radio" name="hear_us" id="hear-us-other" value="Others" class="mr-2">
+                  Others
+                </label>
+                <input type="text"
+                  class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-yellow-500 focus:ring-yellow-500 focus:ring-2 focus:ring-opacity-50 focus:outline-none hidden"
+                  name="hear_us_specify" placeholder="Please specify" maxlength="100">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit"
+          class="flex justify-center bg-blue-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+          Submit
+        </button>
+      </div>
+
+    </div>
+  </form>
+  {% endblock %}
+</main>
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+ 
+    function toggleInputField(radioId, inputName) {
+      const radio = document.getElementById(radioId);
+      const input = document.querySelector(`input[name="${inputName}"]`);
+      if (radio && input) {
+        
+        const radioGroup = document.querySelectorAll(`input[name="${radio.name}"]`);
+        radioGroup.forEach(radioBtn => {
+          radioBtn.addEventListener("change", () => {
+            if (radio.checked) {
+              input.style.display = "block"; 
+            } else {
+              input.style.display = "none"; 
+              input.value = ""; 
+            }
+          });
+        });
+      }
+    }
+  
+    // Add event listeners for each pair
+    toggleInputField("ngs-others", "ngs_specify");
+    toggleInputField("sample-type-others", "sample_type_specify");
+    toggleInputField("expected-data-other", "expected_data_specify");
+    toggleInputField("data-analysis-other", "data_analysis_specify");
+    toggleInputField("hear-us-other", "hear_us_specify");
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const serviceChoice = document.getElementById('serviceChoice');
+    const specificService = document.getElementById('specificService');
+
+    const subOptions = {
+      'DNA Sequencing': ['Whole Genome Sequencing', 'Whole Exome Sequencing', 'Denovo Sequencing', 'Genotyping-By-Sequencing Sequencing'],
+      'RNA Sequencing': ['Whole Transcriptome analysis', 'Long non-coding RNA', 'Isoform Sequencing'],
+      'Epigenetics': ['Whole Genome Bi-sulfite Sequencing', 'MeDIP-Seq', 'ChIP-Seq', 'ATAC-Seq'],
+      'Microarray': ['Gene Expression', 'Copy number variation', 'miRNA profiling', 'Custom'],
+      '10X': ['Single Cell Genome Sequencing', 'Single Cell ATAC-Seq', 'Single Cell RNA Sequencing'],
+      'Pacbio': ['Pacbio Genome Sequencing', 'Pacbio Isoseq Sequencing'],
+      'Metagenomics': ['Shotgun Metagenomics', '16S/18s rDNA Sequencing', 'ITS sequencing'],
+      'Metatranscriptomics': ['Enriched for coding RNA', '16S rRNA']
+    };
+
+    serviceChoice.addEventListener('change', function () {
+      const selectedOption = serviceChoice.value;
+      specificService.innerHTML = '';  
+
+      const defaultOption = document.createElement('option');
+      defaultOption.value = '';
+      defaultOption.textContent = 'Please select an option first';
+      defaultOption.selected = true; 
+      specificService.appendChild(defaultOption);
+
+      if (selectedOption && subOptions[selectedOption]) {
+        const optgroup = document.createElement('optgroup');
+        optgroup.label = serviceChoice.options[serviceChoice.selectedIndex].text;
+
+        subOptions[selectedOption].forEach(subOption => {
+          const newOption = document.createElement('option');
+          newOption.value = subOption;
+          newOption.textContent = subOption;
+          optgroup.appendChild(newOption);
+        });
+
+        specificService.appendChild(optgroup);
+      }
+    });
+  });
+</script>
+{% include 'components/footer/version_2.html' %}
+
+{% endblock %}

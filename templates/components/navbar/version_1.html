@@ -1,0 +1,48 @@
+{% load static %}
+{% load asset_tags %}
+
+<nav class="bg-white drop-shadow-xl ">
+  <div class="container mx-auto flex items-center justify-between py-4 ">
+
+    <a href="/" class="flex items-center">
+      <img src="{% public_assets 'images/datahelix.webp' %}" alt="miBiome Therapeutics" class="ml-5 h-20">
+    </a>
+
+
+    <button class="block lg:hidden text-gray-600 border border-gray-400 rounded-lg focus:outline-gray-400 mr-7"
+      id="navbar-toggler">
+      <svg class="h-8 w-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <div class="hidden lg:flex flex-grow justify-end items-center space-x-4 mr-5" id="navbarNav">
+      <a href="/about/" class="text-gray-600 hover:text-gray-900 text-xl">About</a>
+      <a href="/services/" class="text-gray-600 hover:text-gray-900 text-xl">What We Do</a>
+      <a href="/coevidd/" class="text-gray-600 hover:text-gray-900 text-xl">CoEVIDD</a>
+      <a href="/clinicalgenomics/" class="text-gray-600 hover:text-gray-900 text-xl">Clinical Genomics</a>
+      <a href="/research/" class="text-gray-600 hover:text-gray-900 text-xl">Research</a>
+      <a href="/apply/" class="text-gray-600 hover:text-gray-900 text-xl">Careers</a>
+      <a href="/contact-us/" class="text-gray-600 hover:text-gray-900 text-xl">Contact</a>
+    </div>
+  </div>
+
+  <div class="lg:hidden hidden flex-col bg-white shadow-lg w-full px-4 py-2" id="mobile-menu">
+    <a href="/about/" class="block text-gray-600 py-2">About</a>
+    <a href="/services/" class="block text-gray-600 py-2">What We Do</a>
+    <a href="/coevidd/" class="block text-gray-600 py-2">CoEVIDD</a>
+    <a href="/clinicalgenomics/" class="block text-gray-600 py-2">Clinical Genomics</a>
+    <a href="/research/" class="block text-gray-600 py-2">Research</a>
+    <a href="/apply/" class="block text-gray-600 py-2">Careers</a>
+    <a href="/contact-us/" class="block text-gray-600 py-2">Contact</a>
+  </div>
+</nav>
+
+<script>
+  const toggler = document.getElementById('navbar-toggler');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  toggler.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+  });
+</script>

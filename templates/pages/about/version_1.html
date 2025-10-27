@@ -1,0 +1,22 @@
+{% extends '../../base.html' %}
+
+{% load static %}
+{% load asset_tags %}
+{% block content %}
+{% include 'components/navbar/version_2.html' %} 
+    {% include 'components/who_we_are/version_2.html' %}
+    <h2 class="text-primary pt-10 text-center text-5xl font-bold mb-5">Our Vision</h2>
+    <div class="flex justify-center">
+        <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+    </div>
+    <p class="py-5 px-2 text-lg text-gray-800 leading-relaxed text-center">
+        Empowering healthcare and science through the power of genomics
+    </p>
+        {% include 'components/team/version_2.html' %}
+ 
+    
+  
+    {% include 'components/timeline/version_4.html' %}
+    {% include 'components/footer/version_2.html' %} 
+ 
+{% endblock content %}

@@ -1,0 +1,90 @@
+
+<div class="flex flex-col justify-center items-center bg-white px-6 py-24 sm:py-32 lg:px-8">
+    <div class="mx-auto max-w-xl text-center">
+       
+        <div class="max-w-xl text-center text-xl p-2 pb-10">
+            We welcome interns with science and engineering education to participate in our genomics and computation journey.
+        </div>
+    </div>
+    <form method="post"
+          enctype="multipart/form-data"
+          class="mx-auto mt-16 max-w-xl bg-gray-200 rounded-lg shadow-md px-6 py-4 space-y-4">
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                <strong class="font-bold">Oops!</strong>
+                <span class="block sm:inline">There were some errors in your submission. Please correct them:</span>
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}<li>{{ field|title }}: {{ error }}</li>{% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <div class="flex flex-col sm:flex-row sm:space-x-4">
+            <div class="flex-1">
+                <label for="id_first_name" class="block text-sm font-semibold leading-6 text-primary">First Name</label>
+                <input type="text"
+                       id="id_first_name"
+                       name="first_name"
+                       class="block w-full rounded-md border-2 border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm focus:border-black   placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                       required>
+            </div>
+            <div class="flex-1">
+                <label for="id_last_name" class="block text-sm font-semibold leading-6 text-primary">Last Name</label>
+                <input type="text"
+                       id="id_last_name"
+                       name="last_name"
+                       class="block w-full rounded-md border-2 border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm focus:border-black   placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                       required>
+            </div>
+        </div>
+        <div>
+            <label for="id_email" class="block text-sm font-semibold leading-6 text-primary">Email</label>
+            <input type="email"
+                   id="id_email"
+                   name="email"
+                   class="block w-full rounded-md border-2 border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm focus:border-black   placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                   required>
+        </div>
+        <div>
+            <label for="id_phone_number" class="block text-sm font-semibold leading-6 text-primary">Phone Number</label>
+            <input type="tel"
+                   id="id_phone_number"
+                   name="phone_number"
+                   class="block w-full rounded-md border-2 border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm focus:border-black   placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                   pattern="[0-9]{10}"
+                   title="Phone number must be 10 digits"
+                   required>
+        </div>
+        <div>
+            <label for="id_education" class="block text-sm font-semibold leading-6 text-primary">Education</label>
+            <input type="text"
+                   id="id_education"
+                   name="education"
+                   class="block w-full rounded-md border-2 border-gray-300 px-3.5 py-2 text-gray-900 shadow-sm focus:border-black   placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                   required>
+        </div>
+        <div>
+            <label for="id_stream" class="block text-sm font-semibold leading-6 text-primary">Stream</label>
+            <select id="id_stream"
+                    name="stream"
+                    class="block w-full rounded-md border-2 border-gray-300 bg-white px-3.5 py-2 text-gray-900 shadow-sm focus:border-black  ">
+                <option value="" disabled selected>Select Stream</option>
+                <option value="science">Science</option>
+                <option value="technology">Technology</option>
+                <option value="marketing">Marketing</option>
+            </select>
+        </div>
+        <div>
+            <label for="id_resume" class="block text-sm font-semibold leading-6 text-primary">Resume (PDF only)</label>
+            <input type="file"
+                   id="id_resume"
+                   name="resume"
+                   class="block w-full rounded-md border-2 border-gray-300 bg-white px-3.5 py-2 text-gray-900 shadow-sm focus:border-black   placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+        </div>
+        <div class="mt-10">
+            <button type="submit" class="block w-full rounded-md bg-secondary px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">Submit Application</button>
+        </div>
+    </form>
+</div>

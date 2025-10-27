@@ -1,0 +1,194 @@
+{% extends '../../base.html' %}
+
+{% load static %}
+{% load asset_tags %}
+
+
+{% block content %}
+
+
+<style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .notice-box {
+      background-color: #ffffff;
+      border: 2px solid #333333;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .message {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .countdown {
+      font-size: 28px;
+      font-weight: bold;
+      color: #d1105a;
+    }
+  </style>
+
+  <div class="notice-box">
+    <div class="message">
+      Genomics Services Business Operations of <strong>miBiome Therapeutics</strong><br>
+      will now be conducted under the name <strong>Chromosome Labs</strong>.
+    </div>
+    <div class="countdown" id="countdown">Redirecting in 3...</div>
+  </div>
+
+  <script>
+    let counter = 3;
+    const countdownEl = document.getElementById('countdown');
+
+    const interval = setInterval(() => {
+      counter--;
+      if (counter > 0) {
+        countdownEl.textContent = `Redirecting in ${counter}...`;
+      } else {
+        clearInterval(interval);
+        window.location.href = "https://chromosomelabs.com/";
+      }
+    }, 1000);
+  </script>
+
+
+
+
+{% comment %} {% include 'components/navbar/version_2.html' %} 
+<h2 class="text-primary pt-10 text-center text-5xl font-bold pb-5">Our Offerings</h2>
+<div class="bg-gray-100">
+<div class="flex justify-center pb-24 mb-20">
+    <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+</div>
+   
+<div class="lg:pl-24 lg:pr-24 grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
+    
+  <div class="card mb-24 w-auto bg-base-100 shadow-xl">
+      <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+          <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/infection.jpg' %}" alt="infection image">
+          
+      </figure>
+      <div class="card-body mt-24">
+          <h2 class="card-title items-center justify-center">COVID-UNIQSEQ</h2>
+          <p>We have infrastructure to perform Whole Genome Sequencing (WGS) of SARS Cov2, used for genome surveillance. Although being an excellent tool, application of WGS for public health programs can be expensive.</p>
+          <div class="card-actions justify-end">
+              <a class="btn btn-primary text-base-100"
+                 href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20COVID-UNIQSEQ">
+                  Chat with us
+                  <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+              </a>
+          </div>
+      </div>
+  </div>
+
+
+
+
+
+
+
+<div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/infection.jpg' %}" alt="infection image">
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">MTB-SEQ</h2>
+      <p>Using Next-Generation Sequencing (NGS), it is now possible to perform identification of Mycobacterium tuberculosis infection in an unprecedented speed. This is significant, considering the large population size of countries where the burden of Tuberculosis (TB) is high.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20MTB-SEQ">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/infection.jpg' %}" alt="infection image">
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">TB-DRUGSEQ</h2>
+      <p>Cultureless NGS method, faster Drug Resistance profiling from sputum, BAL, CSF, ascitic fluid, biopsy or any clinical sample. The early detection of MDR/Pre-XDR/XDR-TB could guide clinicians in the appropriate adjustment of MDR-TB treatment regimen with effective drugs to prevent treatment failure.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20TB-DRUGSEQ">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div>
+
+
+
+
+<div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/infection.jpg' %}" alt="infection image">
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">AMR-SEQ</h2>
+      <p>NGS-based profiling of antimicrobial resistance markers in antibiotic resistant microbes.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20AMR-SEQ">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div> <div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/infection.jpg' %}" alt="infection image">
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">Sapiens-SEQ</h2>
+      <p>Whole-genome sequencing of human genome (using NGS) and computation analysis to identify variants which can be useful in clinical decision-making (precision medicine), wellness and preventive genetics.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20Sapiens-SEQ">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div> <div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/infection.jpg' %}" alt="infection image">
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">miRESPIRATORYBiome</h2>
+      <p>Metagenomic analysis for identification of bacteria and fungi in respiratory samples through NGS.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20miRESPIRATORYBiome">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div>
+</div>
+</div>
+{% include 'components/footer/version_2.html' %}  {% endcomment %}
+{% endblock content %}

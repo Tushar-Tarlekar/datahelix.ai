@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+{% load asset_tags %}
+
+<header class="flex justify-between items-center p-4">
+  <a href="/" target="_self" rel="noopener noreferrer" class="flex items-center">
+    <div class="hidden lg:block md:hidden sm:hidden ">
+      <img src="{% public_assets 'images/datahelix.webp' %}" class="h-14" />
+    </div>
+    <div class="block sm:block md:hidden lg:hidden ">
+      <img src="{% public_assets 'images/datahelix.webp' %}" class="h-6 ml-2" />
+    </div>
+  </a>
+  <p class="flex items-center space-x-2">
+
+
+    <span class="text-sm hidden lg:block md:hidden sm:hidden ">Already have an account?</span>
+
+    <a href="{% url 'user:login' %}" target="_self" rel="noopener noreferrer" class="text-blue-600 hover:underline">Log
+      In</a>
+  </p>
+</header>
+<div class="flex flex-wrap">
+
+  <!-- Left section: Picture tag with responsive images -->
+  <div class="box w-full md:w-1/2 bg-cover bg-center hidden md:block">
+
+    <img src="{% public_assets 'images/dna1.jpg' %}" alt="DNA Background" class="w-full h-full object-cover">
+  </div>
+
+  <!-- Right section: Form content -->
+  <div class="w-full md:w-1/2 bg-[#eff2f8] p-4 lg:py-28">
+    {% if messages %}
+    <div class="bg-red-100 border-1 border-red-500 text-red-700 p-4 mb-10">
+      {% for message in messages %}
+      <p class="font-semibold md:text-xl">{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="max-w-md mx-auto bg-white p-6 rounded-2xl">
+      <h3 class="text-2xl md:text-3xl font-semibold mb-4 text-[#27266a]">Create your account</h3>
+      <p class="mb-6"></p>
+
+      <form method="POST">
+        {% csrf_token %}
+        <div class="flex gap-2">
+          <div class="mb-4">
+            <label for="first_name" class="block text-sm md:text-lg text-[#a8cf39]">First Name<span
+                class="text-red-500">*</span></label>
+            <input type="text" name="first_name" autocomplete="none"
+              class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          </div>
+          <div class="mb-4">
+            <label for="last_name" class="block text-sm md:text-lg text-[#a8cf39]">Last Name<span
+                class="text-red-500">*</span></label>
+            <input type="text" name="last_name" autocomplete="none"
+              class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="email" class="block text-sm md:text-lg text-[#a8cf39]">Email<span
+              class="text-red-500">*</span></label>
+          <input type="email" name="email" required placeholder="Enter your email address" autocomplete="none"
+            class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <div class="mb-4">
+          <label for="mobile" class="block text-sm md:text-lg text-[#a8cf39]">Mobile Number<span
+              class="text-red-500">*</span></label>
+          <div class="flex mt-1">
+            <span
+              class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-100 text-gray-500 text-sm">+91</span>
+            <input type="tel" name="phone" required placeholder="Enter your mobile number" autocomplete="tel"
+              class="p-2 block w-full border border-gray-300 rounded-r-lg shadow-sm focus:ring-blue-500 focus:border-blue-500">
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <label for="password" class="block text-sm md:text-lg text-[#a8cf39]">Password<span
+              class="text-red-500">*</span></label>
+          <input type="password" name="password" required placeholder="Enter your password" autocomplete="none"
+            class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <div class="mb-6">
+          <label for="confirm_password" class="block text-sm md:text-lg text-[#a8cf39]">Confirm Password<span
+              class="text-red-500">*</span></label>
+          <input type="password" name="confirm_password" required placeholder="Confirm your password"
+            autocomplete="none"
+            class="mt-1 p-2 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+        </div>
+
+        <button type="submit" class="w-full py-3 text-white bg-[#db245f] rounded-lg hover:bg-[#830e57] font-bold">Sign
+          Up</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,253 @@
+{% extends '../../base.html' %}
+
+{% load static %}
+{% load asset_tags %}
+
+
+
+
+
+{% block content %}
+
+
+<style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .notice-box {
+      background-color: #ffffff;
+      border: 2px solid #333333;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .message {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .countdown {
+      font-size: 28px;
+      font-weight: bold;
+      color: #d1105a;
+    }
+  </style>
+
+  <div class="notice-box">
+    <div class="message">
+      Genomics Services Business Operations of <strong>miBiome Therapeutics</strong><br>
+      will now be conducted under the name <strong>Chromosome Labs</strong>.
+    </div>
+    <div class="countdown" id="countdown">Redirecting in 3...</div>
+  </div>
+
+  <script>
+    let counter = 3;
+    const countdownEl = document.getElementById('countdown');
+
+    const interval = setInterval(() => {
+      counter--;
+      if (counter > 0) {
+        countdownEl.textContent = `Redirecting in ${counter}...`;
+      } else {
+        clearInterval(interval);
+        window.location.href = "https://chromosomelabs.com/";
+      }
+    }, 1000);
+  </script>
+
+
+{% comment %} {% include 'components/navbar/version_2.html' %} 
+<h2 class="text-primary pt-10 text-center text-5xl font-bold pb-5">Our Offerings</h2>
+<div class="bg-gray-100">
+    <div class="flex justify-center pb-24 mb-20">
+        <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+    </div>
+<div class="lg:pl-24 lg:pr-24 grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
+
+  <div class="card mb-24 w-auto bg-base-100 shadow-xl">
+      <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+          <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/dna.jpg' %}" alt="dna image">
+         
+      </figure>
+      <div class="card-body mt-24">
+          <h2 class="card-title items-center justify-center">DNA Based</h2>
+          <p>Whole Genome Sequencing\nWhole & Clinical Exome\nViral Genome Sequencing.</p>
+          <div class="card-actions justify-end">
+              <a class="btn btn-primary text-base-100"
+                 href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20DNA Based">
+                  Chat with us
+                  <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+              </a>
+          </div>
+      </div>
+  </div>
+
+
+
+
+<div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/rna.png' %}" alt="rna image">
+
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">RNA Based</h2>
+      <p>Whole Transcriptome Analysis\nSmall RNA Sequencing\nLong non-coding RNA Sequencing.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20RNA Based">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div>
+
+
+
+
+<div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/metagenomics.png' %}" alt="metagenomics image">
+
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">Metagenomics</h2>
+      <p>Shotgun Metagenomics\nShotgun Metatranscriptomics\n16S/18S rDNA/rRNA Sequencing.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20Metagenomics">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div>
+
+<div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/epigenetics.jpg' %}" alt="epigenetics image">
+
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">Epigenetics</h2>
+      <p>Whole Genome Bi-sulfite Sequencing\nMeDIP-Seq\nChIP-Seq.</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20Epigenetics">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div>
+
+<div class="card mb-24 w-auto bg-base-100 shadow-xl">
+  <figure class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full overflow-visible">
+      <img class="w-full h-full object-cover rounded-full overflow-hidden shadow-lg bg-base-100" src=" {% public_assets 'images/computation.png' %}" alt="computation image">
+
+  </figure>
+  <div class="card-body mt-24">
+      <h2 class="card-title items-center justify-center">Computation</h2>
+      <p>De Novo Assembly of Novel Genomes\nDrug Repurposing\nBioinformatics Analysis</p>
+      <div class="card-actions justify-end">
+          <a class="btn btn-primary text-base-100"
+             href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20Computation">
+              Chat with us
+              <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+          </a>
+      </div>
+  </div>
+</div>
+</div>
+
+
+</div>
+
+
+
+<h2 class="text-primary pt-10 text-center text-5xl font-bold pb-5">Technology we use</h2>
+<div class="m-5">
+    <div class="flex justify-center">
+        <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+    </div>
+</div>
+
+
+<div class="m-5 space-y-4">
+ 
+  <div class="lg:flex lg:items-center">
+   
+    <div class="hidden lg:block lg:mr-4">
+      <img class="max-w-full  h-auto " src="{% public_assets 'images/illumina.jpg' %}" alt="illumina image">
+    </div>
+
+    <div class="lg:w-1/2">
+      <h2 class="text-xl text-primary font-bold mb-2">Illumina NGS</h2>
+      <div class="line bg-primary h-1 w-10 mb-2 transition-all hover:w-full"></div>
+      <div class="lg:flex lg:flex-col lg:h-full lg:justify-between">
+        <p class="lg:mb-4">Access focused applications such as targeted resequencing, metagenomics, small genome sequencing, targeted gene expression profiling, and more. MiSeq reagents enable up to 15 Gb of output with 25 million sequencing reads and 2 × 300 bp read lengths.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="lg:hidden mt-4">
+    <img class="max-w-full w-96 h-auto " src="{% public_assets 'images/illumina.jpg' %}" alt="illumina image">
+  </div>
+  
+  <div class="lg:flex lg:items-center">
+    <div class="hidden lg:block  lg:mr-4">
+      <img class="max-w-full  h-auto " src="{% public_assets 'images/nanopore.jpg' %}" alt="nanopore image">
+    </div>
+
+    <div class="lg:w-1/2">
+      <h2 class="text-xl text-primary font-bold mb-2">Oxford Nanopore NGS</h2>
+      <div class="line bg-primary h-1 w-10 mb-2 transition-all hover:w-full"></div>
+      <div class="lg:flex lg:flex-col lg:h-full lg:justify-between">
+        <p class="lg:mb-4">Oxford Nanopore has developed a new generation of DNA/RNA sequencing technology. It is the only sequencing technology that offers real-time analysis (for rapid insights), in fully scalable formats from pocket to population scale, that can analyse native DNA or RNA and sequence any length of fragment to achieve short to ultra-long read lengths.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="lg:hidden mt-4">
+    <img class="max-w-full w-96 h-auto " src="{% public_assets 'images/nanopore.jpg' %}" alt="nanopore image">
+  </div>
+  
+  <div class="lg:flex lg:items-center">
+    <div class="hidden lg:block  lg:mr-4">
+      <img class="max-w-full  h-auto " src="{% public_assets 'images/thermo.jpg' %}" alt="thermo image">
+    </div>
+
+    <div class="lg:w-1/2">
+      <h2 class="text-xl text-primary font-bold mb-2">Thermo Real Time PCR</h2>
+      <div class="line bg-primary h-1 w-10 mb-2 transition-all hover:w-full"></div>
+      <div class="lg:flex lg:flex-col lg:h-full lg:justify-between">
+        <p class="lg:mb-4">This instrument is a simple, reliable, and affordable real-time PCR system that doesn’t require compromise on performance or quality. This system offers a sensitive, robust solution for forensic DNA quantification. With maximum dye versatility, this HID solution offers accurate, trusted results in a small benchtop footprint.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="lg:hidden mt-4">
+    <img class="max-w-full w-96 h-auto" src="{% public_assets 'images/thermo.jpg' %}" alt="thermo image">
+  </div>
+
+</div>
+
+
+
+{% include 'components/footer/version_2.html' %}  {% endcomment %}
+
+
+
+{% endblock content %}

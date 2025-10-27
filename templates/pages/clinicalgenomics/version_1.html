@@ -1,0 +1,232 @@
+{% extends '../../base.html' %}
+
+{% load static %}
+{% load asset_tags %}
+
+
+{% block content %}
+
+
+ <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .notice-box {
+      background-color: #ffffff;
+      border: 2px solid #333333;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .message {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .countdown {
+      font-size: 28px;
+      font-weight: bold;
+      color: #d1105a;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+
+  <div class="notice-box hidden" id="noticeBox">
+    <div class="message">
+      Genomics Services Business Operations of <strong>miBiome Therapeutics</strong><br>
+      will now be conducted under the name <strong>Chromosome Labs</strong>.
+    </div>
+    <div class="countdown" id="countdown">Redirecting in 3...</div>
+  </div>
+
+  <script>
+    const today = new Date();
+    const cutoff = new Date('2025-07-15T23:59:59'); // End of 15 July 2025
+
+    if (today <= cutoff) {
+   
+      document.getElementById('noticeBox').classList.remove('hidden');
+
+      let counter = 3;
+      const countdownEl = document.getElementById('countdown');
+
+      const interval = setInterval(() => {
+        counter--;
+        if (counter > 0) {
+          countdownEl.textContent = `Redirecting in ${counter}...`;
+        } else {
+          clearInterval(interval);
+          window.location.href = "https://chromosomelabs.com/";
+        }
+      }, 1000);
+    } else {
+    
+      window.location.href = "https://chromosomelabs.com/";
+    }
+  </script>
+
+
+{% comment %} {% include 'components/navbar/version_2.html' %} 
+<h2 class="text-primary pt-10 text-center text-5xl font-bold pb-5">Our Offerings</h2>
+<div class="bg-gray-100">
+    <div class="flex justify-center">
+        <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+    </div>
+
+
+
+
+
+
+
+<div class="lg:pl-24 lg:pr-24 grid grid-cols-1 md:grid-cols-3 gap-4 mt-16">
+   
+    <div class="card w-auto bg-base-100 shadow-xl mb-8">
+        <figure >
+      <img class="mt-8 w-48 h-48 bg-gradient-to-br from-neutral from-40% to-[#015a8d] rounded-full overflow-visible" src=" {% public_assets 'images/infection.png' %}" alt="infection image">
+
+          
+        </figure>
+        <div class="card-body mb-2">
+            <h2 class="card-title items-center justify-center">miInfectionBiome</h2>
+            <p>miInfectionBiome (Infectious Disease Identification) is an unbiased diagnostic assay for identification of micro-organisms present in biological fluids.\nAs it is culture independent, sub-typing and virulence profiling can be performed alongwith AMR (anti-microbial resistance). The tests detect novel, emergent and re-emergent pathogens</p>
+            <div class="card-actions justify-end">
+                <a class="btn btn-primary text-base-100"
+                   href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20miInfectionBiome">
+                    Chat with us
+                    <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<div class="card w-auto bg-base-100 shadow-xl mb-8">
+    <figure>
+      <img class="mt-8 w-48 h-48 bg-gradient-to-br from-neutral from-40% to-[#015a8d]  rounded-full overflow-visible" src=" {% public_assets 'images/resistant.png' %}" alt="resistant image">
+
+      
+    </figure>
+    <div class="card-body mb-2">
+        <h2 class="card-title items-center justify-center">miResistantBiome</h2>
+        <p>miResistantBiome (Antibiotic Resistance Determination test) is a sequence based reporting for drug resistance. It determines the presence or absence of established markers for resistance to various drugs.\nNew panel of resistance markers created in-house through data analytics, AI and ML. Targeted therapy recommended by health care professionals based on report will reduce cost and minimize drug side effects.</p>
+        <div class="card-actions justify-end">
+            <a class="btn btn-primary text-base-100"
+               href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20miResistantBiome">
+                Chat with us
+                <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="card w-auto bg-base-100 shadow-xl mb-8">
+    <figure>
+        <img class="mt-8 w-48 h-48 bg-gradient-to-br from-neutral from-40% to-[#015a8d]  rounded-full overflow-visible" src=" {% public_assets 'images/cancer.png' %}" alt="cancer image">
+      
+    </figure>
+    <div class="card-body mb-2">
+        <h2 class="card-title items-center justify-center">miCancerBiome</h2>
+        <p>4,13,519 men and 3,71,302 women lost their lives to cancer in India, in the year 2018. One woman dies of cervical cancer every 8 minutes. For every 2 women newly diagnosed with breast cancer, one woman dies of it. Tobacco alone kills 3500 people everyday. Estimated number of people living with cancer in India is around 2.25 million.\nmiCancerBiome (Genomic data-based interventions) will help people make better decisions for chemotherapy, surgery, radiation treatment and all targeted therapies. In addition, these tests will also aid in preventing cancer with a strong emphasis on research for India-specific biomarkers</p>
+        <div class="card-actions justify-end">
+            <a class="btn btn-primary text-base-100"
+               href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20miCancerBiome">
+                Chat with us
+                <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="card w-auto bg-base-100 shadow-xl mb-8">
+    <figure>
+        <img class="mt-8 w-48 h-48 bg-gradient-to-br from-neutral from-40% to-[#015a8d]  rounded-full overflow-visible" src=" {% public_assets 'images/reproductive.png' %}" alt="reproductive image">
+
+       
+    </figure>
+    <div class="card-body mb-2">
+        <h2 class="card-title items-center justify-center">miReproductiveBiome</h2>
+        <p>miReproductiveBiome is focused on research for India-specific markers for reproductive health. Empowering informed choices for fertility and pregnancy is very crucial. Studies on genome and microbiome parameters that affect reproductive health and their consequences to child-birth and beyond. New research-based solutions for reproductive health.</p>
+        <div class="card-actions justify-end">
+            <a class="btn btn-primary text-base-100"
+               href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20miReproductiveBiome">
+                Chat with us
+                <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card w-auto bg-base-100 shadow-xl mb-8">
+    <figure>
+        <img class="mt-8 w-48 h-48 bg-gradient-to-br from-neutral from-40% to-[#015a8d]  rounded-full overflow-visible" src=" {% public_assets 'images/inherited.png' %}" alt="inherited image">
+       
+    </figure>
+    <div class="card-body mb-2">
+        <h2 class="card-title items-center justify-center">miInheritedBiome</h2>
+        <p>Disease conditions in which the genetic changes are almost exclusively responsible for causing the condition are called genetic disorders, or inherited diseases.\nmiInheritedBiome focuses on India-specific markers for genetic diseases. Scientists, doctors, genetic counsellors and patients can contribute together to address miInheritedBiome.</p>
+        <div class="card-actions justify-end">
+            <a class="btn btn-primary text-base-100"
+               href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20miInheritedBiome">
+                Chat with us
+                <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="card w-auto bg-base-100 shadow-xl mb-8">
+    <figure>
+        <img class="mt-8 w-48 h-48 bg-gradient-to-br from-neutral from-40% to-[#015a8d]  rounded-full overflow-visible" src=" {% public_assets 'images/immune.png' %}" alt="immune image">
+
+    </figure>
+    <div class="card-body mb-2">
+        <h2 class="card-title items-center justify-center">miImmuneBiome</h2>
+        <p>miImmuneBiome carries out India-specific HLA typing donor match research and applications. HLA are proteins (or markers) found on most cells in the body. The immune system uses these markers to recognize which cells belong to the body and which do not. HLA typing is used in organ transplants like kidney, heart, platelet, liver, lung etc.</p>
+        <div class="card-actions justify-end">
+            <a class="btn btn-primary text-base-100"
+               href="https://wa.me/919650231515?text=Hello%20I%20came%20across%20your%20website%20and%20I%20want%20to%20know%20about%20miImmuneBiome">
+                Chat with us
+                <img class="w-[20px] h-[20px] "   src=" {% public_assets 'images/svg/whatsapp.svg' %}" alt="whatsapp svg">
+            </a>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+{% include 'components/footer/version_2.html' %}  {% endcomment %}
+{% endblock content %}

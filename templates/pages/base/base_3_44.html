@@ -1,0 +1,42 @@
+{% load static %}
+{% load asset_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+        miBiome Therapeutics
+        {% endblock title %}</title>
+
+    
+       
+        
+    <link rel="shortcut icon" href="{% public_assets 'images/logo.png' %}" type="image/x-icon">
+   
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+   
+</head>
+<body class="bg-white font-poppins ">
+ 
+ 
+
+  
+   
+
+
+
+
+
+  
+    
+   
+    {% block content %}{% endblock %}
+        
+
+        
+        
+ 
+</body>
+</html>

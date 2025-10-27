@@ -1,0 +1,31 @@
+
+{% load static %}
+{% load asset_tags %}
+
+
+  <footer class="footer p-10 bg-gray-700 text-white">
+    <aside>
+      <a href="/">
+      <img class="w-[142px] h-20 " href="/" src=" {% public_assets 'images/datahelix.webp'  %}" alt=" mibiome_logo" >
+    </a>
+   
+    </aside> 
+    {% comment %} <nav>
+      <h6 class="footer-title">Services</h6> 
+      <a class="link link-hover" href="{% url 'services' %}">Genomics</a>
+      <a class="link link-hover" href="{% url 'clinical_genomics' %}">Clinical Genomics</a>
+      <a class="link link-hover" href="{% url 'quote:quote' %}">Quote</a>
+      <a class="link link-hover" href="{% url 'partner' %}">Partners</a>
+    </nav>  {% endcomment %}
+    <nav>
+      <h6 class="footer-title">Company</h6> 
+      <a class="link link-hover" href="{% url 'about' %}">About us</a>
+  
+      <a class="link link-hover" href="{% url 'contact' %}">Contact</a>
+      <a class="link link-hover" href="{% url 'research' %}">Publications</a>
+    </nav> 
+    <nav>
+      <h6 class="footer-title">Legal</h6> 
+      <a href="{% url 'terms' %}" class="link link-hover">Terms of use</a>
+    </nav>
+  </footer>

@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% load static %}
+{% load asset_tags %}
+
+<nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16">
+      <div class="flex-shrink-0 flex items-center">
+        <img src="{% public_assets 'images/datahelix.webp' %}" alt="Logo" class="h-10 w-auto">
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <div class="relative">
+          <button id="createButton" class="bg-[#db245f] rounded-lg hover:bg-[#830e57] text-white px-4 py-2 sm:px-6">
+            <span class="hidden sm:inline">Create</span>
+            <span class="inline sm:hidden">+</span>
+          </button>
+
+          <div id="createDropdown"
+            class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md border border-black shadow-lg p-2">
+            <a href="{% url 'place_order' partner.slug_name %}"
+              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 mb-1">My Orders</a>
+            <a href="{% url 'submit_query' partner.slug_name %}"
+              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200">Queries</a>
+          </div>
+        </div>
+
+        <div class="relative">
+          <button id="profileButton" class="focus:outline-none">
+
+            <img src="{% public_assets 'images/avatar.png'%}" alt="Profile Image"
+              class="h-10 w-10 rounded-full border-2 border-[#292d78] object-cover">
+          </button>
+
+          <div id="profileDropdown"
+            class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-black p-2">
+            <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 mb-1">My Name</a>
+            <a href="#" class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200 mb-1">My Info</a>
+            <a href="{% url 'user:logout' %}"
+              class="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-200">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="flex flex-col items-center justify-center min-h-screen pt-20">
+
+  <div id="ordersSection" class="lg:w-3/4 w-full bg-white  p-4 mx-auto mt-10">
+    <h2 class="text-3xl  font-bold mb-4 text-[#27266a]">My Orders</h2>
+
+    <div class="overflow-x-auto   mx-auto">
+      {% if user_orders %}
+      <table class="min-w-full bg-white border border-gray-300 mx-auto">
+        <thead>
+          <tr class="bg-[#292d78] text-white">
+            <th class="py-3 px-4  text-sm md:w-1/3 md:text-base font-semibold text-center">Project Title</th>
+            <th class="py-3 px-4 text-center text-sm md:w-1/3 md:text-base font-semibold">Created At</th>
+            <th class="py-3 px-4 text-center text-sm md:w-1/3 md:text-base font-semibold">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in user_orders %}
+          <tr class="hover:bg-gray-100 transition">
+            <td
+              class="py-3 px-4 border-b border-gray-300 md:w-1/3 text-[#292d78] text-sm md:text-base font-semibold text-center">
+              {{ order.id }}</td>
+            <td
+              class="py-3 px-4 border-b border-gray-300 md:w-1/3 text-gray-600 text-sm md:text-base font-semibold text-center">
+              {{ order.created_at | date:"M d, Y" }}</td>
+            <td
+              class="py-3 px-4 border-b border-gray-300 md:w-1/3 text-[#68993a] text-sm md:text-base font-semibold text-center">
+              {{ order.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="text-center text-[#a83962] text-lg mt-4">You have not placed any orders yet.</p>
+      {% endif %}
+    </div>
+
+    <h2 id="queriesSection" class="text-3xl font-bold text-[#292d78] mt-6 mb-3 ">Your Queries</h2>
+    <div class="overflow-x-auto   mx-auto">
+      {% if user_queries %}
+      <table class="min-w-full bg-white border border-gray-300 mx-auto">
+        <thead>
+          <tr class="bg-[#a83962] text-white">
+            <th class="py-3 px-4 text-center text-sm md:text-base md:w-1/3 font-semibold ">Query Text</th>
+            <th class="py-3 px-4 text-center text-sm md:text-base md:w-1/3 font-semibold ">Raised At</th>
+            <th class="py-3 px-4 text-center text-sm md:text-base md:w-1/3 font-semibold">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for query in user_queries %}
+          <tr class="hover:bg-gray-100 transition">
+            <td class="py-3 px-4 border-b border-gray-300 text-[#292d78] md:w-1/3 text-sm md:text-base max-w-12">
+              <p class="text-ellipsis overflow-hidden">{{ query.query_text }}
+              </p>
+            </td>
+            <td
+              class="py-3 px-4 border-b border-gray-300 text-gray-600 md:w-1/3 text-sm md:text-base font-semibold text-center">
+              {{ query.created_at|date:"M d, Y" }}</td>
+            <td
+              class="py-3 px-4 border-b border-gray-300 text-[#68993a] md:w-1/3 text-sm md:text-base font-semibold text-center">
+              {{ query.status }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="text-center text-[#a83962] text-lg mt-4">You haven't raised any queries or tickets yet.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+<script>
+  let openDropdown = null;
+
+  document.getElementById('profileButton').addEventListener('click', function (event) {
+    var profileDropdown = document.getElementById('profileDropdown');
+    toggleDropdown(profileDropdown);
+    event.stopPropagation();
+  });
+
+  document.getElementById('createButton').addEventListener('click', function (event) {
+    var createDropdown = document.getElementById('createDropdown');
+    toggleDropdown(createDropdown);
+    event.stopPropagation();
+  });
+
+  function toggleDropdown(currentDropdown) {
+    if (openDropdown && openDropdown !== currentDropdown) {
+      openDropdown.classList.add('hidden');
+    }
+    currentDropdown.classList.toggle('hidden');
+    openDropdown = currentDropdown.classList.contains('hidden') ? null : currentDropdown;
+  }
+
+  document.addEventListener('click', function () {
+    if (openDropdown) {
+      openDropdown.classList.add('hidden');
+      openDropdown = null;
+    }
+  });
+</script>
+
+
+
+{% include 'components/footer/version_2.html' %}
+
+{% endblock %}

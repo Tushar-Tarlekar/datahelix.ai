@@ -1,0 +1,31 @@
+{% extends '../../base_1.html' %}
+
+{% load static %}
+{% load asset_tags %}
+
+
+
+{% block content %}
+{% include 'components/navbar/version_2.html' %} 
+{% include 'components/banner/version_1.html' %} 
+{% include 'components/who_we_are/version_1.html' %} 
+{% comment %} <h2 class="text-primary pt-10 text-center text-5xl font-bold mb-5">miBiome in Numbers</h2>
+<div class="flex justify-center">
+    <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+</div>
+<p class="pt-5 text-lg text-gray-800 leading-relaxed text-center">
+    Curious about our operational scale? Let the numbers speak for themselves</p>
+{% include 'components/stat/version_1.html' %}  {% endcomment %}
+<h2 class="bg-white text-primary pt-10 text-center text-5xl font-bold pb-5">Our Offerings</h2>
+<div class="bg-white flex justify-center">
+    <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+</div>
+
+{% include 'components/card/version_1.html' %} 
+{% comment %} <h2 class="text-primary pt-10 text-center text-5xl font-bold pb-5">Client Testimonials</h2>
+<div class=" flex justify-center">
+    <div class="line bg-primary h-1 w-10 transition-all hover:w-full"></div>
+</div>
+{% include 'components/testimonial/version_1.html' %}  {% endcomment %}
+{% include 'components/footer/version_2.html' %} 
+{% endblock %}
